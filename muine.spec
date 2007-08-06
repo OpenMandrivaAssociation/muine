@@ -10,7 +10,7 @@
 %define fname %name-%cvs
 %endif
 %define build_plf 0
-%define release %mkrel 2
+%define release %mkrel 3
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
 %define distsuffix plf
@@ -45,6 +45,8 @@ Patch2: muine-libnotify.patch
 Patch3: muine-0.8.7-64bit.patch
 #gw fix libdir in pkgconfig files and remove dbus-sharp dep
 Patch4: muine-0.8.7-pkgconfig.patch
+#gw rename bundled gsequence API 
+Patch5: muine-1143-gsequence.patch
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gnome-sharp2 >= %gtk_sharp_version
@@ -55,6 +57,7 @@ BuildRequires:	libGConf2-devel
 BuildRequires:	libid3tag-devel >= 0.15
 BuildRequires:	libflac-devel
 BuildRequires:	mono-devel >= %{req_mono_version}
+BuildRequires:  ndesk-dbus-glib
 BuildRequires:	oggvorbis-devel
 BuildRequires:	ImageMagick
 BuildRequires:	gnome-common intltool
@@ -127,14 +130,19 @@ Monodoc format.
 %patch2 -p0
 %patch3 -p1 -b .64bit
 %patch4 -p1 -b .pkgconfig
+%patch5 -p0
 
 %if %cvs
 ./autogen.sh
 %else
+intltoolize --force
 aclocal -I m4
 autoconf
 automake
 %endif
+
+cp %_prefix/lib/mono/ndesk-dbus-1.0/*.dll deps/dbus-sharp
+cp %_prefix/lib/mono/ndesk-dbus-glib-1.0/*.dll deps/dbus-sharp-glib
 
 %build
 # lower optimization, seems to be more stable
@@ -188,6 +196,7 @@ install -m 644 ./data/images/muine-16.png %{buildroot}%{_miconsdir}/muine.png
 
 # remove unwanted files
 rm -f %{buildroot}%{_libdir}/%{name}/lib*.{a,la}
+rm -f %{buildroot}%{_libdir}/%{name}/NDesk.DBus*
 
 #add the plugins
 mkdir -p %buildroot%monoprefix/%name/plugins
@@ -229,7 +238,6 @@ rm -rf %{buildroot}
 %monoprefix/%{name}/plugins/InotifyPlugin.dll
 %monoprefix/%{name}/plugins/InotifyPlugin.dll.config
 %dir %_libdir/%name
-%_libdir/%name/NDesk.DBus*
 %_libdir/%name/*muine*
 %_libdir/%name/libinotifyglue.so*
 %_datadir/dbus-1/services/org.gnome.Muine.service
