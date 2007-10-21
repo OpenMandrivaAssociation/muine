@@ -1,4 +1,4 @@
-%define version 0.8.7
+%define version 0.8.8
 %define cvs 0
 %define pre 0
 %if %pre
@@ -10,7 +10,7 @@
 %define fname %name-%cvs
 %endif
 %define build_plf 0
-%define release %mkrel 3
+%define release %mkrel 1
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
 %define distsuffix plf
@@ -34,19 +34,11 @@ License:	GPL
 Group:		Sound
 URL:		http://muine-player.org/
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
-Source:		http://muine.gooeylinux.org/%{fname}.tar.bz2
+Source:		http://muine.gooeylinux.org/%{fname}.tar.gz
 #gw hardcode plugins dir so plugin packages can be noarch
 Patch: 		muine-0.8.3-plugindir.patch
-#gw update for FLAC 1.1.3 API
-Patch1: muine-0.8.7-flac-1.1.3.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=336248
-Patch2: muine-libnotify.patch
-#gw 64 bit portability fix
-Patch3: muine-0.8.7-64bit.patch
-#gw fix libdir in pkgconfig files and remove dbus-sharp dep
-Patch4: muine-0.8.7-pkgconfig.patch
-#gw rename bundled gsequence API 
-Patch5: muine-1143-gsequence.patch
+Patch2: muine-0.8.8-libnotify.patch
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gnome-sharp2 >= %gtk_sharp_version
@@ -126,11 +118,7 @@ Monodoc format.
 %endif
 
 %patch -p1
-%patch1 -p1 -b .flac
-%patch2 -p0
-%patch3 -p1 -b .64bit
-%patch4 -p1 -b .pkgconfig
-%patch5 -p0
+%patch2 -p1 -b .libnotify
 
 %if %cvs
 ./autogen.sh
