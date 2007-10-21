@@ -51,6 +51,7 @@ BuildRequires:	libflac-devel
 BuildRequires:	mono-devel >= %{req_mono_version}
 BuildRequires:  ndesk-dbus-glib
 BuildRequires:	oggvorbis-devel
+BuildRequires:	libmusicbrainz-devel
 BuildRequires:	ImageMagick
 BuildRequires:	gnome-common intltool
 #gw broken intltool:
