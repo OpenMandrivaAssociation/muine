@@ -10,7 +10,7 @@
 %define fname %name-%cvs
 %endif
 %define build_plf 0
-%define release %mkrel 1
+%define release %mkrel 2
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
 %define distsuffix plf
@@ -51,7 +51,8 @@ BuildRequires:	libflac-devel
 BuildRequires:	mono-devel >= %{req_mono_version}
 BuildRequires:  ndesk-dbus-glib
 BuildRequires:	oggvorbis-devel
-BuildRequires:	libmusicbrainz-devel
+# gw for the automatic mono deps
+BuildRequires:	libmusicbrainz-devel libnotify-devel
 BuildRequires:	ImageMagick
 BuildRequires:	gnome-common intltool
 #gw broken intltool:
