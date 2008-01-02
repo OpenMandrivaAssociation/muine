@@ -33,6 +33,7 @@ Release:	%{release}
 License:	GPL
 Group:		Sound
 URL:		http://muine-player.org/
+Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 Source:		http://muine.gooeylinux.org/%{fname}.tar.gz
 #gw hardcode plugins dir so plugin packages can be noarch
 Patch: 		muine-0.8.3-plugindir.patch
