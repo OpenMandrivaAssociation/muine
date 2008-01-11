@@ -158,17 +158,6 @@ mv %buildroot%_datadir/doc/muine/muine-docs* %buildroot%monoprefix/monodoc/sourc
 
 %find_lang %name
 # menu entry
-mkdir -p %{buildroot}%{_menudir}
-cat > %{buildroot}%{_menudir}/%{name} << _EOF_
-?package(%{name}): \
- command="%{_bindir}/muine" \
- icon="muine.png" \
- longtitle="Listen to your music" \
- needs="x11" \
- section="Multimedia/Sound" \
- title="Muine Music Player" \
- startup_notify="true" xdg="true"
-_EOF_
 
 desktop-file-install --vendor="" \
   --remove-category="Application" \
@@ -234,7 +223,6 @@ rm -rf %{buildroot}
 %_libdir/pkgconfig/*.pc
 %{_datadir}/applications/*.desktop
 %_datadir/icons/hicolor/*/*/muine*
-%{_menudir}/%{name}
 %{_iconsdir}/muine.png
 %{_miconsdir}/muine.png
 %{_liconsdir}/muine.png
