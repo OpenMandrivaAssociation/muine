@@ -181,19 +181,23 @@ rm -f %{buildroot}%{_libdir}/%{name}/NDesk.DBus*
 mkdir -p %buildroot%monoprefix/%name/plugins
 install -m 644 plugins/*.dll plugins/*.dll.config %buildroot%monoprefix/%name/plugins/
 
+%if %mdkversion < 200900
 %post
 %update_menus
 %update_desktop_database
 %post_install_gconf_schemas muine
 %update_icon_cache hicolor
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas muine
 
+%if %mdkversion < 200900
 %postun
 %clean_menus
 %clean_desktop_database
 %clean_icon_cache hicolor
+%endif
 
 %post doc
 %_bindir/monodoc --make-index > /dev/null
