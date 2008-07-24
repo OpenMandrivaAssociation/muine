@@ -41,8 +41,7 @@ Patch: 		muine-0.8.3-plugindir.patch
 Patch2: muine-0.8.8-libnotify.patch
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-vfs2-devel
-BuildRequires:	gnome-sharp2 >= %gtk_sharp_version
-BuildRequires:	glade-sharp2 >= %gtk_sharp_version
+BuildRequires:	gnome-sharp2-devel >= %gtk_sharp_version
 BuildRequires:	mono-tools
 BuildRequires:	gtk+2-devel
 BuildRequires:	libGConf2-devel
