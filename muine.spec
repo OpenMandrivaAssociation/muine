@@ -1,4 +1,4 @@
-%define version 0.8.8
+%define version 0.8.9
 %define cvs 0
 %define pre 0
 %if %pre
@@ -10,7 +10,7 @@
 %define fname %name-%cvs
 %endif
 %define build_plf 0
-%define release %mkrel 2
+%define release %mkrel 1
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
 %define distsuffix plf
@@ -30,11 +30,11 @@ Summary:	Music player for GNOME
 Name:		muine
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2+
 Group:		Sound
 URL:		http://muine-player.org/
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
-Source:		http://muine.gooeylinux.org/%{fname}.tar.gz
+Source:		http://download.gnome.org/sources/%name/%fname.tar.bz2
 #gw hardcode plugins dir so plugin packages can be noarch
 Patch: 		muine-0.8.3-plugindir.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=336248
@@ -124,15 +124,8 @@ Monodoc format.
 
 %if %cvs
 ./autogen.sh
-%else
-intltoolize --force
-aclocal -I m4
-autoconf
-automake
 %endif
 
-cp %_prefix/lib/mono/ndesk-dbus-1.0/*.dll deps/dbus-sharp
-cp %_prefix/lib/mono/ndesk-dbus-glib-1.0/*.dll deps/dbus-sharp-glib
 
 %build
 # lower optimization, seems to be more stable
@@ -145,7 +138,7 @@ CFLAGS=`echo %{optflags} | sed 's/-O[0-9]/-O/'`
 %endif
 
 
-make
+make LIBS=-lX11
 
 %install
 rm -rf %{buildroot}
