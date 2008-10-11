@@ -1,16 +1,12 @@
-%define version 0.8.9
-%define cvs 0
+%define version 0.8.10
 %define pre 0
 %if %pre
 %define fname %name-%version%pre
 %else
 %define fname %name-%version
 %endif
-%if %cvs
-%define fname %name-%cvs
-%endif
 %define build_plf 0
-%define release %mkrel 2
+%define release %mkrel 1
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
 %define distsuffix plf
@@ -37,8 +33,6 @@ Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 Source:		http://download.gnome.org/sources/%name/%fname.tar.bz2
 #gw hardcode plugins dir so plugin packages can be noarch
 Patch: 		muine-0.8.3-plugindir.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=336248
-Patch2: muine-0.8.8-libnotify.patch
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gnome-sharp2-devel >= %gtk_sharp_version
@@ -111,19 +105,8 @@ This package contains the API documentation for the %name in
 Monodoc format.
 
 %prep
-%if %cvs
-%setup -q -n %name
-%else
 %setup -q -n %fname
-%endif
-
 %patch -p1
-%patch2 -p1 -b .libnotify
-
-%if %cvs
-./autogen.sh
-%endif
-
 
 %build
 # lower optimization, seems to be more stable
