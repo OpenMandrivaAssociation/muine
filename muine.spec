@@ -109,6 +109,7 @@ Monodoc format.
 %patch -p1
 
 %build
+%define _disable_ld_no_undefined 1
 # lower optimization, seems to be more stable
 CFLAGS=`echo %{optflags} | sed 's/-O[0-9]/-O/'`
 %configure2_5x \
