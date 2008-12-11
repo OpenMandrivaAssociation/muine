@@ -46,7 +46,7 @@ BuildRequires:  ndesk-dbus-glib
 BuildRequires:	oggvorbis-devel
 # gw for the automatic mono deps
 BuildRequires:	libmusicbrainz-devel libnotify-devel
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 BuildRequires:	intltool
 #BuildRequires:	gnome-common 
 %if %build_plf
