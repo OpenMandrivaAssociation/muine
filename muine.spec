@@ -6,7 +6,7 @@
 %define fname %name-%version
 %endif
 %define build_plf 0
-%define release %mkrel 1
+%define release %mkrel 2
 %{?_with_plf: %{expand: %%global build_plf 1}}
 %if %build_plf
 %define distsuffix plf
