@@ -1,25 +1,17 @@
-%define version 0.8.10
+%define version 0.8.11
 %define pre 0
 %if %pre
 %define fname %name-%version%pre
 %else
 %define fname %name-%version
 %endif
-%define build_plf 0
-%define release %mkrel 2
-%{?_with_plf: %{expand: %%global build_plf 1}}
-%if %build_plf
-%define distsuffix plf
-%endif
+%define release %mkrel 1
 
 %define req_mono_version 0.91
 %define gtk_sharp_version 1.9.2
 
 %define	gstname gstreamer0.10
 %define gstver 0.10.0
-%define build_gst 1
-%{?_with_gst: %{expand: %%global build_gst 1}}
-%{?_without_gst: %{expand: %%global build_gst 0}}
 
 %define monoprefix %_prefix/lib
 Summary:	Music player for GNOME
@@ -30,47 +22,30 @@ License:	GPLv2+
 Group:		Sound
 URL:		http://muine-player.org/
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
-Source:		http://download.gnome.org/sources/%name/%fname.tar.bz2
+Source:		http://ftp.gnome.org/pub/GNOME/sources/%name/%fname.tar.bz2
 #gw hardcode plugins dir so plugin packages can be noarch
 Patch: 		muine-0.8.3-plugindir.patch
 BuildRequires:	gdbm-devel
-BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gnome-sharp2-devel >= %gtk_sharp_version
 BuildRequires:	mono-tools
 BuildRequires:	gtk+2-devel
 BuildRequires:	libGConf2-devel
-BuildRequires:	libid3tag-devel >= 0.15
-BuildRequires:	libflac-devel
 BuildRequires:	mono-devel >= %{req_mono_version}
 BuildRequires:  ndesk-dbus-glib
-BuildRequires:	oggvorbis-devel
+BuildRequires:	taglib-sharp
 # gw for the automatic mono deps
 BuildRequires:	libmusicbrainz-devel libnotify-devel
 BuildRequires:	imagemagick
 BuildRequires:	intltool
 #BuildRequires:	gnome-common 
-%if %build_plf
-BuildRequires: libfaad2-static-devel
-%endif
 Requires:	mono >= %{req_mono_version}
 Requires: shared-mime-info >= 0.16
-%if %build_gst
 BuildRequires:	libgstreamer-plugins-base-devel >= %gstver
 Requires:	%gstname-plugins-good
 Requires:	%gstname-plugins-base
 Requires:	%gstname-plugins-bad >= %gstver
 Requires:	%gstname-flac >= %gstver
-%if %build_plf
-Requires: %gstname-faad >= %gstver
-%endif
-%else
-BuildRequires: libxine-devel
-Requires: xine-plugins
-Requires: xine-flac
-%if %build_plf
-Requires: xine-faad
-%endif
-%endif
+Suggests: %gstname-faad >= %gstver
 BuildRequires: desktop-file-utils
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
@@ -80,10 +55,6 @@ Muine is a music player for GNOME. Its UI has been designed from the
 ground up to be very comfortable, and not just a clone of iTunes.
 It is playlist-based, but does have a music library (not a traditional
 one, though).
-%if %build_plf
-This package is in PLF, as it uses MPEG4 technology and might violate
-some patents.
-%endif
 
 %package trayicon
 Summary: TrayIcon plugin for muine
@@ -112,12 +83,7 @@ Monodoc format.
 %define _disable_ld_no_undefined 1
 # lower optimization, seems to be more stable
 CFLAGS=`echo %{optflags} | sed 's/-O[0-9]/-O/'`
-%configure2_5x \
-%if %build_gst
-  --enable-gstreamer=0.10 \
-%else
-  --enable-gstreamer=no \
-%endif
+%configure2_5x
 
 
 make LIBS=-lX11
