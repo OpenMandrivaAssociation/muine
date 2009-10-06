@@ -5,7 +5,7 @@
 %else
 %define fname %name-%version
 %endif
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define req_mono_version 0.91
 %define gtk_sharp_version 1.9.2
@@ -154,7 +154,7 @@ rm -rf %{buildroot}
 
 %files -f %name.lang
 %defattr(-, root, root)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS NEWS README TODO
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_bindir}/*
 %dir %monoprefix/%{name}
