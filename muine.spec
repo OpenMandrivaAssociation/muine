@@ -5,7 +5,7 @@
 %else
 %define fname %name-%version
 %endif
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define req_mono_version 0.91
 %define gtk_sharp_version 1.9.2
