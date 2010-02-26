@@ -37,7 +37,7 @@ BuildRequires:	taglib-sharp
 # gw for the automatic mono deps
 BuildRequires:	libmusicbrainz-devel libnotify-devel
 BuildRequires:	imagemagick
-BuildRequires:	intltool
+BuildRequires:	intltool gnome-common
 #BuildRequires:	gnome-common 
 Requires:	mono >= %{req_mono_version}
 Requires: shared-mime-info >= 0.16
