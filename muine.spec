@@ -5,7 +5,7 @@
 %else
 %define fname %name-%version
 %endif
-%define release %mkrel 4
+%define release %mkrel 5
 
 %define req_mono_version 0.91
 %define gtk_sharp_version 1.9.2
@@ -25,6 +25,7 @@ Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 Source:		http://ftp.gnome.org/pub/GNOME/sources/%name/%fname.tar.bz2
 #gw hardcode plugins dir so plugin packages can be noarch
 Patch: 		muine-0.8.3-plugindir.patch
+Patch1:		muine-0.8.11-drop-gnome-icon-theme.patch
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-sharp2-devel >= %gtk_sharp_version
 BuildRequires:	mono-tools
@@ -78,9 +79,11 @@ Monodoc format.
 %prep
 %setup -q -n %fname
 %patch -p1
+%patch1 -p0
 
 %build
 %define _disable_ld_no_undefined 1
+autoreconf -fi
 # lower optimization, seems to be more stable
 CFLAGS=`echo %{optflags} | sed 's/-O[0-9]/-O/'`
 %configure2_5x
