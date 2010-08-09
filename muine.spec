@@ -34,7 +34,7 @@ BuildRequires:	gtk+2-devel
 BuildRequires:	libGConf2-devel
 BuildRequires:	mono-devel >= %{req_mono_version}
 BuildRequires:  ndesk-dbus-glib
-BuildRequires:	taglib-sharp
+BuildRequires:	taglib-sharp-devel
 # gw for the automatic mono deps
 BuildRequires:	libmusicbrainz-devel libnotify-devel
 BuildRequires:	imagemagick
