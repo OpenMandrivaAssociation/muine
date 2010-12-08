@@ -27,6 +27,7 @@ Source:		http://ftp.gnome.org/pub/GNOME/sources/%name/%fname.tar.bz2
 Patch0: 		muine-0.8.3-plugindir.patch
 Patch1:		muine-0.8.11-drop-gnome-icon-theme.patch
 Patch2: muine-0.8.11-fix-build-with-gtk2.19.7.patch
+Patch3: muine-0.8.11-deprecated.patch
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-sharp2-devel >= %gtk_sharp_version
 BuildRequires:	mono-tools
@@ -82,10 +83,11 @@ Monodoc format.
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
+%patch3 -p1
+autoreconf -fi
 
 %build
 %define _disable_ld_no_undefined 1
-autoreconf -fi
 # lower optimization, seems to be more stable
 CFLAGS=`echo %{optflags} | sed 's/-O[0-9]/-O/'`
 %configure2_5x
