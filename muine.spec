@@ -5,7 +5,7 @@
 %else
 %define fname %name-%version
 %endif
-%define release %mkrel 8
+%define release %mkrel 9
 
 %define req_mono_version 0.91
 %define gtk_sharp_version 1.9.2
@@ -62,7 +62,7 @@ one, though).
 %package trayicon
 Summary: TrayIcon plugin for muine
 Group: Sound
-Requires: %{_lib}notify1
+Requires: %{_lib}notify4
 Requires: %name = %version
 
 %description trayicon
