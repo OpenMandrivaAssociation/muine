@@ -1,0 +1,11 @@
+diff -p -up muine-0.8.11/libmuine/Makefile.am~ muine-0.8.11/libmuine/Makefile.am
+--- muine-0.8.11/libmuine/Makefile.am~	2009-09-13 16:53:58.000000000 +0200
++++ muine-0.8.11/libmuine/Makefile.am	2010-12-08 14:41:06.000000000 +0100
+@@ -6,7 +6,6 @@ INCLUDES =							\
+ 	$(WARN_CFLAGS)						\
+ 	-DG_DISABLE_DEPRECATED					\
+ 	-DGTK_DISABLE_DEPRECATED				\
+-	-DGDK_DISABLE_DEPRECATED				\
+ 	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
+ 	-DGNOME_DISABLE_DEPRECATED
+ 
