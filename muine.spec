@@ -20,7 +20,7 @@ Version:	%{version}
 Release:	%{release}
 License:	GPLv2+
 Group:		Sound
-URL:		http://muine-player.org/
+URL:		https://muine-player.org/
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 Source:		http://ftp.gnome.org/pub/GNOME/sources/%name/%fname.tar.bz2
 #gw hardcode plugins dir so plugin packages can be noarch
