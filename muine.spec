@@ -28,6 +28,11 @@ Patch0: 		muine-0.8.3-plugindir.patch
 Patch1:		muine-0.8.11-drop-gnome-icon-theme.patch
 Patch2: muine-0.8.11-fix-build-with-gtk2.19.7.patch
 Patch3: muine-0.8.11-deprecated.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gdbm-devel
 BuildRequires:	gnome-sharp2-devel >= %gtk_sharp_version
 BuildRequires:	mono-tools
